@@ -24,7 +24,7 @@ int main() {
         renderer.render();
 
         // Here you could add a delay to control the frame rate, e.g., using std::this_thread::sleep_for
-        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 
         // Check for a condition to end the game (this could be inside gameLoop or here)
         // if (someCondition) {

@@ -1,6 +1,6 @@
 #include "Paddle.h"
 
-Paddle::Paddle() : position(), velocity(), width(0), height(0)  {}
+Paddle::Paddle() : position(8, 1), velocity(), width(0), height(0)  {}
 Paddle::Paddle(const Paddle& other) : position(other.position), velocity(other.velocity), width(other.width), height(other.height) {}
 
 Paddle& Paddle::operator=(const Paddle& other) {

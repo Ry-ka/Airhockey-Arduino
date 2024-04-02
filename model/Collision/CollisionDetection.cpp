@@ -26,22 +26,22 @@ void CollisionDetection::checkAndRespondToWallCollisions(Puck& puck, int tableWi
     Position puckPos = puck.getPosition();
     Velocity puckVel = puck.getVelocity();
     
+    int newX = puckPos.getX() + puckVel.getDx();
+    int newY = puckPos.getY() + puckVel.getDy();
+
+
     // Horizontal wall collision
-    if (puckPos.getX() <= 0) {
+    if (newX <= 0 || newX >= tableWidth) {
         puck.setVelocity(-puckVel.getDx(), puckVel.getDy());
-        puck.setPosition(1, puckPos.getY()); // Adjust position slightly inside
-    } else if (puckPos.getX() >= tableWidth) {
-        puck.setVelocity(-puckVel.getDx(), puckVel.getDy());
-        puck.setPosition(tableWidth - 1, puckPos.getY()); // Adjust position slightly inside
+        // Adjust position more accurately
+        puck.setPosition(std::max(1, std::min(tableWidth - 1, newX)), newY);
     }
 
     // Vertical wall collision
-    if (puckPos.getY() <= 0) {
+    if (newY <= 0 || newY >= tableHeight) {
         puck.setVelocity(puckVel.getDx(), -puckVel.getDy());
-        puck.setPosition(puckPos.getX(), 1); // Adjust position slightly inside
-    } else if (puckPos.getY() >= tableHeight) {
-        puck.setVelocity(puckVel.getDx(), -puckVel.getDy());
-        puck.setPosition(puckPos.getX(), tableHeight - 1); // Adjust position slightly inside
+        // Adjust position more accurately
+        puck.setPosition(newX, std::max(1, std::min(tableHeight - 1, newY)));
     }
 
 }
